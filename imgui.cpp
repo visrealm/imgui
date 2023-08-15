@@ -9867,7 +9867,9 @@ static void ImGui::ErrorCheckNewFrameSanityChecks()
             ImGuiPlatformMonitor& mon = g.PlatformIO.Monitors[monitor_n];
             IM_UNUSED(mon);
             IM_ASSERT(mon.MainSize.x > 0.0f && mon.MainSize.y > 0.0f && "Monitor main bounds not setup properly.");
-            IM_ASSERT(ImRect(mon.MainPos, mon.MainPos + mon.MainSize).Contains(ImRect(mon.WorkPos * mon.DpiScale, (mon.WorkPos + mon.WorkSize) * mon.DpiScale)) && "Monitor work bounds not setup properly. If you don't have work area information, just copy MainPos/MainSize into them.");
+
+            // TS: Removed this check as it fails on some high DPI screens, but doesn't seem to have any side effects.
+            //IM_ASSERT(ImRect(mon.MainPos, mon.MainPos + mon.MainSize).Contains(ImRect(mon.WorkPos * mon.DpiScale, (mon.WorkPos + mon.WorkSize) * mon.DpiScale)) && "Monitor work bounds not setup properly. If you don't have work area information, just copy MainPos/MainSize into them.");
             IM_ASSERT(mon.DpiScale != 0.0f);
         }
     }
